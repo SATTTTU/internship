@@ -1,0 +1,114 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, calc(33.33% - 20px));
+    grid-template-rows: auto auto auto;
+    gap: 20px;
+    padding: 20px;
+    grid-template-areas:
+        "grid-member1 grid-member2 grid-member3"
+        "grid-member4 grid-member5 grid-member6"
+        "grid-member7 grid-member7 grid-member7";
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.container > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden; 
+    border-radius: 10px; 
+}
+
+.container img {
+    width: 100%;
+    height: auto; 
+    object-fit: cover; 
+    border-radius: 5px;
+}
+
+.grid-member1 {
+    background: #FF7F50; 
+    color: #fff;
+    grid-area: grid-member1;
+}
+
+.grid-member2 {
+    background: #6A5ACD;
+    color: #fff;
+    grid-area: grid-member2;
+}
+
+.grid-member3 {
+    background: #20B2AA;
+    color: #fff;
+    grid-area: grid-member3;
+}
+
+.grid-member4 {
+    background: #FFA07A;
+    color: #fff;
+    grid-area: grid-member4;
+}
+
+.grid-member5 {
+    background: #4682B4;
+    color: #fff;
+    grid-area: grid-member5;
+}
+
+.grid-member6 {
+    background: #9ACD32;
+    color: #fff;
+    grid-area: grid-member6;
+}
+
+.grid-member7 {
+    background: hsl(9, 100%, 64%);
+    color: #fff;
+    grid-area: grid-member7;
+}
+
+
+button {
+    border: none;
+    padding: 10px 20px;
+    color: #FF7F50;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #FF7F50;
+    color: #fff;
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr; 
+        grid-template-areas:
+            "grid-member1"
+            "grid-member2"
+            "grid-member3"
+            "grid-member4"
+            "grid-member5"
+            "grid-member6"
+            "grid-member7";
+    }
+
+    .container > div {
+        width: 100%;
+    }
+}
