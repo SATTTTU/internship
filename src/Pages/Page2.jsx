@@ -1,19 +1,28 @@
 import React, { useEffect, useState } from "react";
+import Loading from "./Loading";
 
 function Page2() {
   const [ano, setAno] = useState([]);
-
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/comments")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => setAno(data))
-      .catch((error) => console.error("Fetch error:", error));
-  }, []);
+  const [loading, setLoading] = useState(true);
+  useEffect(
+    () => {
+      fetch("https://jsonplaceholder.typicode.com/comments")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => setAno(data))
+        .catch((error) => console.error("Fetch error:", error))
+        .then(() => setLoading(false));
+    },
+   
+    []
+  );
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <section className="py-10">
@@ -22,7 +31,7 @@ function Page2() {
           {ano.slice(0, 8).map((comments) => (
             <div
               key={comments.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden"
+              className="bg-white rounded-lg shadow-md overflow-hidden transition-transform transform hover:scale-105 hover:shadow-lg"
             >
               <div className="p-4">
                 <h2 className="text-lg font-semibold mb-2 bg-white text-red-500">

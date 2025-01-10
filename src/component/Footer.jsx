@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 function Footer() {
   return (
-    <div className=''>This is footer  section</div>
-  )
+    <div className='bg-gray-800 text-white text-center py-4'>
+      This is footer section
+    </div>
+  );
 }
 
-export default Footer
+export default Footer;

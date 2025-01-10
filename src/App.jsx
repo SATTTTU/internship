@@ -8,16 +8,25 @@ function App() {
   const { isDarkTheme, toggleTheme } = useContext(ThemeContext);
 
   const appStyle = isDarkTheme
-    ? { backgroundColor: "black", color: "white" }
+    ? { backgroundColor: "black", color: "green" }
     : { backgroundColor: "white", color: "black" };
 
   return (
     <div style={appStyle}>
-      <button onClick={toggleTheme}>Change Theme</button>
-      <p>{isDarkTheme ? "Dark Theme" : "Light Theme"}</p>
+      <div
+        style={{ display: "flex", justifyContent: "flex-end", padding: "10px" }}
+      >
+        <button
+          className="border-solid border-red-700 bg-red-700 text-white px-4 py-2 rounded"
+          onClick={toggleTheme}
+        >
+          Change Theme
+        </button>
+        <p>{isDarkTheme ? "Dark Theme" : "Light Theme"}</p>
+      </div>
+      
       <Header />
       <Footer />
-      
     </div>
   );
 }
