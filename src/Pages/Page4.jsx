@@ -6,17 +6,21 @@ function Page4() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => setUsers(data))
-      .catch((error) => console.error("Fetch error:", error))
-      .finally(() => setLoading(false));
-  }, []);
+    async function fetchData() {
+      try{
+        const response = await fetch("https://jsonplaceholder.typicode.com/users");
+        const data = await response.json();
+        setUsers(data);
+      }
+      catch(error){
+        console.error("Error fetching data:",error);
+      }finally{
+        setLoading(false);
+      }
+    }
+      fetchData();
+    },
+    [])
 
   if (loading) {
     return <Loading />;

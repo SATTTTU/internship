@@ -5,7 +5,7 @@ import "./App.css";
 import { ThemeContext } from "./Pages/Context";
 
 function App() {
-  const { isDarkTheme, toggleTheme } = useContext(ThemeContext);
+  const { isDarkTheme,toggleTheme } = useContext(ThemeContext);
 
   const appStyle = isDarkTheme
     ? { backgroundColor: "black", color: "green" }

@@ -1,41 +1,35 @@
 import React, { useEffect, useState } from "react";
 import Loading from "./Loading";
+import Pagination from "../Pagination/Pagination";
 
 function Page1() {
   const [val, setVal] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(
-    () => {
-      fetch("https://jsonplaceholder.typicode.com/posts")
-        .then((response) => response.json())
-        .then((data) => setVal(data))
-        .finally(() => setLoading(false));
-    },
-    []
-  );
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+        const data = await response.json();
+        setVal(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
   if (loading) {
     return <Loading />;
   }
 
   return (
-    <section className=" py-10">
+    <section className="py-10">
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {val.slice(0, 8).map((post) => (
-            <div
-              key={post.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden transition-transform transform hover:scale-105 hover:shadow-lg"
-            >
-              <div className="p-4">
-                <h2 className="text-lg font-semibold mb-2 text-red-800">
-                  {post.title}
-                </h2>
-                <p className="text-gray-600 mb-4">{post.body}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <Pagination items={val} />
       </div>
     </section>
   );

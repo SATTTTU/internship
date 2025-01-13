@@ -6,18 +6,20 @@ function Page2() {
   const [loading, setLoading] = useState(true);
   useEffect(
     () => {
-      fetch("https://jsonplaceholder.typicode.com/comments")
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.json();
-        })
-        .then((data) => setAno(data))
-        .catch((error) => console.error("Fetch error:", error))
-        .then(() => setLoading(false));
-    },
-   
+       async function fetchData(){
+        try{
+        const response =await fetch("https://jsonplaceholder.typicode.com/comments");
+        const data=await response.json();
+        setAno(data);
+        }catch(error){
+        console("Error fetching data:",error);
+        }finally{
+          setLoading(false);}
+          
+          
+        }
+   fetchData();
+      },
     []
   );
   if (loading) {
