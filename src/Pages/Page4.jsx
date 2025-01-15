@@ -7,20 +7,21 @@ function Page4() {
 
   useEffect(() => {
     async function fetchData() {
-      try{
-        const response = await fetch("https://jsonplaceholder.typicode.com/users");
+      try {
+        const response = await fetch(
+          "https://jsonplaceholder.typicode.com/users"
+        );
         const data = await response.json();
         setUsers(data);
-      }
-      catch(error){
-        console.error("Error fetching data:",error);
-      }finally{
+        debugger;
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
         setLoading(false);
       }
     }
-      fetchData();
-    },
-    [])
+    fetchData();
+  }, []);
 
   if (loading) {
     return <Loading />;
@@ -43,7 +44,8 @@ function Page4() {
                 <p className="text-green-600 mb-4">Username: {user.username}</p>
                 <p className="text-blue-600 mb-4">Email: {user.email}</p>
                 <p>
-                  Address: {user.address.street}, {user.address.suite}, {user.address.city}, {user.address.zipcode}
+                  Address: {user.address.street}, {user.address.suite},{" "}
+                  {user.address.city}, {user.address.zipcode}
                 </p>
               </div>
             </div>

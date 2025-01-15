@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Loading from "./Loading";
-import Pagination from "../Pagination/Pagination";
+import Pagination from "../component/Pagination";
 
 function Page1() {
   const [val, setVal] = useState([]);
