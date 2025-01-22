@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "../App.css";
 import { ThemeContext } from "../Hooks/Context";
+import { toast } from "react-toastify";
 
 function Header() {
   const { isDarkTheme, toggleTheme } = useContext(ThemeContext);
@@ -9,7 +10,7 @@ function Header() {
   const [newtask, setNewtask] = useState("");
   const [status, setStatus] = useState("all");
 
-// static lists of tasks 
+  // static lists of tasks
   const [tasks, setTasks] = useState([
     { id: 1, label: "Jog around", status: "active" },
     { id: 2, label: "Meditation", status: "active" },
@@ -26,7 +27,7 @@ function Header() {
       : status === "active"
       ? tasks.filter((task) => !checkedTasks[task.id])
       : tasks.filter((task) => checkedTasks[task.id]);
-// for handling the checkbox change
+  // for handling the checkbox change
   const handleCheckboxChange = (taskId) => {
     setCheckedTasks((prev) => ({
       ...prev,
@@ -40,7 +41,8 @@ function Header() {
       )
     );
   };
-// for adding the task
+
+  // for adding the task
   const AddTask = (e) => {
     if (e.key === "Enter") {
       if (checkedTasks["new"]) {
@@ -57,19 +59,28 @@ function Header() {
           [newTask.id]: false,
         }));
         setNewtask("");
+        toast.success("Task added successfully");
       }
     }
   };
-// for clearing the completed tasks
+  // for clearing the completed tasks
   const clearCompletedTasks = () => {
     const remainingTasks = tasks.filter((task) => !checkedTasks[task.id]);
     setTasks(remainingTasks);
     setCheckedTasks({});
+  
+    if (remainingTasks.length < tasks.length) {
+      toast.success("Tasks cleared successfully");
+    } else {
+      toast.info("No tasks to clear");
+    }
   };
-// for handling the status of the tasks
+  
+  // for handling the status of the tasks
   const deleteTask = (id) => {
     const filteredTask = tasks.filter((task) => task.id !== id);
     setTasks(filteredTask);
+    toast.success("Task deleted successfully");
   };
   const taskCounts = {
     all: tasks.length,
@@ -78,7 +89,7 @@ function Header() {
   };
   // for changing the status of the tasks
   const taskStatus = ["All", "Active", "Completed"];
-    // for changing the theme of the app
+  // for changing the theme of the app
   const appStyle = isDarkTheme
     ? {
         backgroundImage: "url('src/assets/bg-desktop-dark.jpg')",
@@ -91,9 +102,9 @@ function Header() {
         backgroundRepeat: "no-repeat",
         color: "black",
       };
-        // for changing the icon of the theme conditionally
+  // for changing the icon of the theme conditionally
   const iconClass = isDarkTheme ? "fa-solid fa-moon" : "fa-solid fa-sun";
-      // for changing the card style conditionally
+  // for changing the card style conditionally
   const cardStyle = isDarkTheme
     ? "bg-gray-700 text-white"
     : "bg-white text-black";
@@ -103,10 +114,11 @@ function Header() {
       xmlns="http://www.w3.org/2000/svg"
       width="18"
       height="18"
-      className="cursor-pointer"
+      className="cursor-pointer mr-4"
     >
       <path
-        className="fill-[#494C6B] group-hover:fill-white"
+        style={appStyle}
+        className="fill-[#494C6B] group-hover:fill-gray-300"
         fillRule="evenodd"
         d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
       />
@@ -115,7 +127,7 @@ function Header() {
 
   return (
     <>
-        {/* {// for the main div} */}
+      {/* {// for the main div} */}
       <div
         className={`h-[100vh] ${
           isDarkTheme ? "bg-gray-800 text-white" : "bg-white text-black"
@@ -141,12 +153,12 @@ function Header() {
         {/* {// for the main div} */}
         <div className={`px-4 py-4 ${cardStyle}`}>
           <div className="relative top-[-150px] mx-auto w-full max-w-lg">
-          {/* {// for the input field} */}
+            {/* {// for the input field} */}
             <div
               className={`rounded-lg mb-2 p-1 flex items-center ${cardStyle}`}
             >
               <div
-                className={`ml-4 flex items-center justify-center border w-6 h-6 rounded-full cursor-pointer ${
+                className={`ml-4 flex items-center justify-center border w-6 h-6  rounded-full cursor-pointer ${
                   checkedTasks["new"]
                     ? "bg-blue-500 border-blue-500"
                     : "bg-white border-gray-300"
@@ -156,7 +168,7 @@ function Header() {
                 aria-checked={checkedTasks["new"]}
               >
                 {checkedTasks["new"] && (
-                  <i className="fa-solid fa-check text-white"></i>
+                  <i className="fa-solid fa-check text-white "></i>
                 )}
               </div>
 
@@ -177,11 +189,12 @@ function Header() {
           {/* {// for the list of tasks} */}
           <section className="relative top-[-100px] mx-auto w-full max-w-lg">
             <div className={`p-6 rounded-lg shadow-lg ${cardStyle}`}>
-              <ul className="space-y-4 max-h-[300px] overflow-y-scroll lg:space-y-4 scrollbar-thin scrollbar-thumb-rounded">
+              <ul className="space-y-4 max-h-[300px] overflow-y-scroll lg:space-y-4 scrollbar-thin">
                 {filteredTasks.map((task) => (
                   <li
+                    onClick={() => handleCheckboxChange(task.id)}
                     key={task.id}
-                    className="flex items-center justify-between border-b border-gray-600 pb-2"
+                    className="flex items-center justify-between border-b border-gray-600 pb-2 group"
                   >
                     <div className="flex items-center">
                       <div
@@ -190,7 +203,10 @@ function Header() {
                             ? "bg-blue-500 border-blue-500 "
                             : "bg-white border-gray-00"
                         }`}
-                        onClick={() => handleCheckboxChange(task.id)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleCheckboxChange(task.id);
+                        }}
                         role="checkbox"
                         aria-checked={checkedTasks[task.id]}
                       >
@@ -211,14 +227,14 @@ function Header() {
                     </div>
                     <button
                       onClick={() => deleteTask(task.id)}
-                      className="group"
+                      className="group hidden group-hover:block lg:group-hover:block mr-2"
                     >
                       {data}
                     </button>
                   </li>
                 ))}
               </ul>
-                {/* // for the footer */}
+              {/* // for the footer */}
               <div className="lg:flex lg:items-center lg:justify-between mt-4 flex items-center justify-between">
                 <div className="lg:order-1">
                   <p className="text-sm">
