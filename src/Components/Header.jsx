@@ -15,7 +15,7 @@ function Header() {
 
   return (
     <>
-      <header className="bg-white shadow-md  ">
+      <header className="bg-white shadow-md max-w-[1280px] m-auto  ">
         <div className="container mx-auto px-4 flex justify-between items-center py-4">
           <div>
            <Link to="/aboutus"> <img src={logo} alt="logo" className="w-24" /></Link>
