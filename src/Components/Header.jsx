@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link, Route, Routes } from "react-router-dom";
-import AboutUs from "../Pages/AboutUs";
-import Services from "../Pages/Services";
-import Usecases from "../Pages/Usecases";
-import Pricing from "../Pages/Pricing";
+
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -73,13 +70,7 @@ function Header() {
           </nav>
         </div>
       </header>
-      <Routes>
-        <Route path="/aboutus" element={<AboutUs/>}/>
-        <Route path="/services" element={<Services/>}/>
-        <Route path="/usecases" element={<Usecases/>}/>
-        <Route path="/pricing" element={<Pricing/>}/>
-        <Route path="/blog" element={<Usecases/>}/>
-      </Routes>
+   
     </>
   );
 }
