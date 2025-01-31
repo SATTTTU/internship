@@ -28,7 +28,7 @@ function Home() {
             <span className="block">for Success</span>
           </h1>
 
-          {/* Mobile Image */}
+          
           <div className="mb-6 lg:hidden w-full">
             <img
               src={hero}
@@ -64,7 +64,8 @@ function Home() {
       </section>
 
       {/* Logo Section */}
-      <section className=" max-w-[1280px] m-auto px-6 py-10">
+  <marquee behavior="" direction="">
+  <section className=" max-w-[1280px] m-auto px-6 py-10">
         <div className="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-6 gap-4 ">
           {images.map((image, index) => (
             <img
@@ -76,7 +77,8 @@ function Home() {
           ))}
         </div>
       </section>
-          <Services/>
+  </marquee>
+      <Services />
     </>
   );
 }

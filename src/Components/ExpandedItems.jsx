@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
-// import { CiCircleMinus, CiCirclePlus } from 'react-icons/ci';
-import { Link } from 'react-router-dom';
 import Teams from './Teams';
 import Datas from '../Utils/Datas';
 import plus from "../assets/plus.svg"
 import minus from "../assets/minus.svg"
-import { img } from 'framer-motion/client';
 
 const ExpandedItems = () => {
     const [expandedItems, setExpandedItems] = useState({});
@@ -67,7 +64,7 @@ const ExpandedItems = () => {
       {data.map((item, index) => (
         <div
           key={index}
-          className={`flex flex-col rounded-2xl border-1 border-b-4  p-6 lg:p-8 ${
+          className={`flex flex-col rounded-4xl border-1 border-b-4  p-6 lg:p-8 ${
             expandedItems[index] ? "bg-[#B9FF66]" : "bg-gray-100"
           } transition-all duration-300`}
         >

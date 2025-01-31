@@ -1,12 +1,10 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { LiaFacebook, LiaLinkedin, LiaTwitter } from "react-icons/lia";
+
 function Footer() {
- 
   return (
- <>
- <body>
- <footer className="bg-black text-white max-w-[1280px] mx-auto py-20 px-10 m-10 rounded-2xl">
+    <footer className="bg-black text-white max-w-[1280px] mx-auto py-20 px-10 m-10 rounded-2xl">
       <div className="flex flex-col lg:flex-row justify-between items-center">
         {/* Logo Section */}
         <Link to="/aboutus" className="text-white text-2xl font-bold mb-6 lg:mb-0">
@@ -15,7 +13,7 @@ function Footer() {
 
         {/* Navigation Links */}
         <nav className="mb-6 lg:mb-0">
-          <ul className="flex flex-col lg:flex-row gap-4 lg:gap-10 text-sm lg:underline decoration-0 ">
+          <ul className="flex flex-col lg:flex-row gap-4 lg:gap-10 text-sm lg:underline decoration-0">
             {["About us", "Services", "Use Cases", "Pricing", "Blog"].map((item, index) => (
               <li key={index}>
                 <Link to={`/${item.toLowerCase().replace(/ /g, "")}`} className="hover:text-[#B9FF66]">
@@ -44,14 +42,16 @@ function Footer() {
 
       {/* Contact & Subscription */}
       <div className="mb-8 pt-6 border-b border-gray-600 flex flex-col lg:flex-row justify-between items-center gap-6">
-        <div className="text-center lg:text-left mb-8">
+        <div className="text-center lg:text-left">
           <p className="font-semibold">Contact us:</p>
           <p>Email: info@positivus.com</p>
           <p>Phone: 555-567-8901</p>
-          <p className="flex flex-col">Address: 1234 Main St, Moonstone City, <span>Stardust State 12345</span></p>
+          <p className="flex flex-col">
+            Address: 1234 Main St, Moonstone City, <span>Stardust State 12345</span>
+          </p>
         </div>
 
-        <form className="flex  flex-col lg:flex-row gap-4 bg-[#292A32] p-5 rounded-2xl shadow-lg">
+        <form className="flex flex-col lg:flex-row gap-4 bg-[#292A32] p-5 rounded-2xl shadow-lg">
           <input
             type="email"
             placeholder="Email"
@@ -61,14 +61,16 @@ function Footer() {
             Subscribe
           </button>
         </form>
-        <ul className="flex gap-4 lg:hidden mb-4 ">
+
+        {/* Social Media Icons for Mobile */}
+        <ul className="flex gap-4 lg:hidden">
           {[
             { icon: <LiaLinkedin size={24} />, link: "https://linkedin.com" },
             { icon: <LiaFacebook size={24} />, link: "https://facebook.com" },
             { icon: <LiaTwitter size={24} />, link: "https://twitter.com" },
           ].map((social, index) => (
             <li key={index}>
-              <a href={social.link} target="_blank" rel="noopener noreferrer" className=" hover:text-[#B9FF66]">
+              <a href={social.link} target="_blank" rel="noopener noreferrer" className="hover:text-[#B9FF66]">
                 {social.icon}
               </a>
             </li>
@@ -84,8 +86,6 @@ function Footer() {
         </Link>
       </div>
     </footer>
- </body>
- </>
   );
 }
 

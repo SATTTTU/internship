@@ -1,11 +1,38 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 
+  
+
+body {
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400; /* Adjust as needed */
+  font-style: normal;
+}
 input[type="radio"]:checked {
     accent-color: lime; /* Changes the radio button's color to green when checked */
   }
   
-  input[type="radio"]:checked + label {
-    color: lime; /* Changes the label text color to green when the radio button is selected */
+ 
+  .sticky-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 1280px;
+    margin: auto;
+    z-index: 999;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.3s ease-in-out;
   }
   
+  @keyframes fadeIn {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
   

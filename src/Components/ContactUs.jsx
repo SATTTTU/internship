@@ -11,10 +11,10 @@ const ContactUs = () => {
 
     emailjs
       .sendForm(
-        "service_o5xafed", // Replace with your EmailJS Service ID
-        "template_wurc45d", // Replace with your EmailJS Template ID
+        "service_o5xafed", 
+        "template_wurc45d", 
         form.current,
-        "JeSeqrUVhizEVbO9L" ,// Replace with your EmailJS Public Key
+        "JeSeqrUVhizEVbO9L" ,
       )
       .then(
         (result) => {
@@ -48,25 +48,27 @@ const ContactUs = () => {
             <fieldset>
               {/* Radio Buttons */}
               <div className="flex gap-4">
-                <label className="flex items-center space-x-2  font-semibold">
-                  <input
+              <input
                     type="radio"
                     name="purpose"
                     value="say_hi"
                     className="scale-150 me-1"
                     required
                   />
+                <label className="flex items-center space-x-2 p-1 font-semibold ">
+                
                   Say Hi
                 </label>
-
-                <label className="flex items-center space-x-2  font-semibold">
-                  <input
+               
+                <input
                     type="radio"
                     name="purpose"
                     value="business_inquiry"
                     className="scale-150 me-1"
                     required
                   />
+                <label className="flex items-center space-x-2  font-semibold">
+                 
                   Get a Quote
                 </label>
               </div>
@@ -117,7 +119,7 @@ const ContactUs = () => {
               </div>
 
               {/* Submit Button */}
-              <div className="flex lg:justify-end">
+              <div className="flex lg:justify-end m-4">
                 <button
                   type="submit"
                   className="px-4 py-3 mt-10 text-sm lg:text-base font-medium rounded-lg bg-black text-white shadow-md hover:bg-gray-900 transition duration-300 w-full"

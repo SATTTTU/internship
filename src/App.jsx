@@ -22,14 +22,15 @@ function App() {
     
    
     
-    
-       <Routes>
+  
+    <Routes>
             <Route path="/aboutus" element={<AboutUs/>}/>
-            <Route path="/services" element={<Services/>}/>
+            {/* <Route path="/services" element={<Services/>}/> */}
             <Route path="/usecases" element={<Usecases/>}/>
             <Route path="/pricing" element={<Pricing/>}/>
             <Route path="/blog" element={<Usecases/>}/>
           </Routes>
+       
     
     </>
   )
